@@ -1,0 +1,174 @@
+Printing all combinations of K out of N elements
+================================================
+vector<int> people;//contains the N elements
+vector<int> combination;
+
+void go(int offset, int k) {
+  if (k == 0) {
+    return (combination);//new combination found
+  }
+  for (int i = offset; i <= people.size() - k; ++i) {//"the people.size()-k" so as to be able to fit another k elements
+    combination.push_back(people[i]);
+    go(i+1, k-1);
+    combination.pop_back();
+  }
+}
+
+All Permutations of N elements
+==============================
+vector<int> people;//contains the N elements
+do{...}while(next_permutation(people.begin(),people.end()));
+
+All Combinations of N elements
+==============================
+vector <char> People  = {'a','b','c','d'};// size less than 32 since "i" is integer of 32 bits
+  for(int i=0; i< (1<<People.size()); ++i) {
+      for(int pos=0; pos<People.size(); pos++)  if (i & (1<<pos)) cout << People[pos];        
+      cout << endl;
+  }
+
+
+
+Complexities
+================================================
+Depending on the size of the input ("n") you can suspect the complexity of the 
+"best" solution and what it might involve:
+n<10: O(n!) ....Permutations
+n<20: O(2^n)....Iterate over all subsets, combinations
+n<500:O(n^3)....3 nested loops, possible to get through all triplets of the input elements
+n<5e3:O(n^2)....2 nested loops, possible to get through all pairs of the input elements
+n<1e6:O(n*logn) OR O(n)... you can sort or use a data structure where each operation takes 
+                           up to O(nl*ogn) time and do that operation per input element
+n is large: O(1) OR O(logn)... find a direct formula or  something that halves the input 
+                               size per step.
+
+
+Too Slow...
+===============================================
+-More than 10.000 insertions in an <unordered_set>
+-
+
+
+Sorting but keeping indexes
+================================================
+#include <numeric>      // std::iota
+....
+
+vector <int> v;
+... cin >> v[i]...
+vector<size_t> idx(v.size());
+iota(idx.begin(), idx.end(), 0);
+
+// sort indexes based on comparing values in v using std::stable_sort instead of std::sort
+// to avoid unnecessary index re-orderings when v contains elements of equal values 
+stable_sort(idx.begin(), idx.end(), [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});///ASCENDING ORDER
+sort(numbers.rbegin(), numbers.rend());  IS better than sort(numbers.begin(), numbers.end(), std::greater<int>()); 
+    for descending order sorting because it will not mess up when it comes for long long int input.
+
+
+
+General advices
+================================================
+DO NOT FORGET TO INITIALIZE EVERYTHING
+
+#include <bits/stdc++.h> ->including all standard libraries
+
+g++ -std=c++11 -02 test.cpp -o main.exe ->...to compile with c++11
+
+ios::sync_with_stdio(0); cin.tie(0); //faster input output
+use "\n" instead of endl for speed
+string s; getline(cin,s) // to read a whole line maybe with spaces
+
+int -> -2e9 till 2e9
+long long -> 2e18 till 2e18
+
+int a = 123456789; long long b=a*a; //b will be -1757895751 !!!!
+
+(a + b)%m  == (a%m + b%m)%m !!! it holds not only for "+" but also for "-","*"
+
+In cpp if x<0 then x%m<0... to make it positive just add m
+i.e. if (x%m < 0) cout << (x%m+m);
+
+
+double x = 0.3*3+0.1;  //x=0.99999999999999988898
+printf("%.10f\n",x);   //prints 1.0000000000
+if (x != 1.0) cout << "not equal" //will not print it
+else if (abs(x-1.0)<1e-9) cout<<"equal"; //better way to compare float numbers
+
+
+When you do recursiion find a way not to create/copy new variables in every recursion.
+
+BE CAREFUL in data structures like vector you are allowed to "access" even in positions
+that are greater than their size. e.g. vector <int> P(N); cout << P[N];... 
+
+BE CAREFUL when passing data structures like "vector" as argument in a function. If 
+you do not use the "&" it will copy all the data structure!!! CAN TAKE LOTS OF TIME 
+
+
+AVOID DECLARING VARIABLES IN FOR/IF LOOPS. For example:
+vector<vector <int> *> P(1);
+if (true){
+  vector<int> G={4,5};
+  P[0] = &G;
+  cout << (*P[0])[0] <<" " << (*P[0])[1] << endl;//prints  4 5
+}
+cout << (*P[0])[0] <<" " << (*P[0])[1] << endl;//prints  0 0
+
+
+vector< vector <int>> P;
+vector<int>v(2);
+for (int i=0;i<2; i++){
+  v[0]=i;
+  v[1]=i+1;
+  P.push_back(v); //will store a COPY OF v
+}
+for(auto q:P) {
+  cout<< q[0] << "-"<< q[1]<<"  ";//will print 0-1  1-2  
+}
+
+
+If you have a Dynamic Prog. problem where you want to choose objects such that...
+and you can use multiple times one object it is better NOT to design the algorithm
+such that in every iteration you include a new object (which you consider using
+it multiple times)
+
+
+If you want to insert in a structure numbers that are given randomly but you want them
+to be kept in order then it is faster to just use <set> than a <list> where you insert 
+a new number x in the position given by the iterator upper_bound(myList.begin(), myList.end(), x);...
+
+Interanlly, the elements in a set are always sorted... So the order is in a increasing order
+and not in the order that the elements were inserted!
+
+In an "map" or "set" accessing or finding an element is logarithmic to the size of the 
+structure. Doing it more than 100.000 might cost you more than a second... beware...
+If you have for some reason (maybe you just did a find operation just before and you
+kept the position with an iterator) the iterator pointing to the element, use it. It's O(1)!
+I found that showing the position is good also for inserting in a set but for erasing it takes 
+lot of time (100.000 is too much).
+
+An iterator for set is not random-access iterator so using "advance" takes 
+linear time to the step you "advance"
+
+Reverse iterator is different than (forward) iterator... you cannot assign one to the other.
+
+tie(a, b ,c) = e
+
+//when you have a labyrinth and you want to iterate over all possible next moves...
+map <char, pair<int, int>> Moves={ {'D',{1,0}}, {'U',{-1,0}}, {'R',{0,1}}, {'L',{0,-1}}};
+for (auto const& move: Moves){
+  Direction = move.first;
+  tie(incr_x, incr_y) = move.second;
+  ...
+
+
+#define INF 8e18//for long long 9e18 is the maximum... I put a bit less so as to be able to add a number (less than 1e18...) without going to the minus
+
+
+
+NICE PROBLEMS
+===============================================
+Check again the problems 03_Coin Combinations I and II that depending on
+the order of the loops will either give you the number of combinations 
+of coins summing up to X or permutations summing up to X.
+
