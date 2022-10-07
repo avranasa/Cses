@@ -66,6 +66,16 @@ sort(numbers.rbegin(), numbers.rend());  IS better than sort(numbers.begin(), nu
     for descending order sorting because it will not mess up when it comes for long long int input.
 
 
+Adding & removing elements from a structure but able to query how many of the remaining elements are smaller/bigger
+================================================
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;  
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+ordered_set s; // it has all the functionalities of the normal c++ sets plus the two following functions
+*(s.find_by_order(k))//finds the k-th biggest element
+s.order_of_key(x) // finds the index/position of x element
+
 
 General advices
 ================================================
