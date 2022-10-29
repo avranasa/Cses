@@ -85,8 +85,9 @@ DO NOT FORGET TO INITIALIZE EVERYTHING
 
 g++ -std=c++11 -02 test.cpp -o main.exe ->...to compile with c++11
 
-ios::sync_with_stdio(0); cin.tie(0); //faster input output
-use "\n" instead of endl for speed
+ios::sync_with_stdio(0); cin.tie(0); //FASTER input output ... Especially if you have many cin/cout is good.
+use "\n" instead of endl for speed //FASTER ... Especially if you have many "cout" do it!
+
 string s; getline(cin,s) // to read a whole line maybe with spaces
 
 int -> -2e9 till 2e9
