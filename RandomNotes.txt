@@ -77,6 +77,13 @@ ordered_set s; // it has all the functionalities of the normal c++ sets plus the
 s.order_of_key(x) // finds the index/position of x element
 
 
+Locally checking code
+===========================
+Create the files in.txt and out.txt on the same directory and use the commands below...
+  freopen("in.txt", "r", stdin);
+  freopen("out.txt", "w", stdout);
+
+
 General advices
 ================================================
 DO NOT FORGET TO INITIALIZE EVERYTHING
