@@ -190,3 +190,22 @@ Check again the problems 03_Coin Combinations I and II that depending on
 the order of the loops will either give you the number of combinations 
 of coins summing up to X or permutations summing up to X.
 
+
+Some gits command
+====================
+
+Most used commands :
+- clone repo : `git clone`
+- add remote `git remote add origin <PATH of .git>`
+- create branch `git checkout -b newbranch`
+- change branch `git checkout master`
+- add all files : `git add .`
+- create commit + commentary : `git commit -m "some commit"`
+- push to remote : `git push origin some_remote_branch`
+- get modifications and try to merge : `git pull`
+
+Other commands : 
+- get modif without merging : `git fetch`
+- show changes : `git diff`
+- merge branch featureA into current : `git merge featureA`
+- commit when forgot smthg :   `git commit --amend --no-edit`
