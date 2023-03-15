@@ -7,36 +7,6 @@ using namespace std;
 const long long inf = 1LL<<60; //1.5e18, max(long long)= 9e18 = 2^63
 const int md = 1000000007;
 
-/*NOTES
-vector x = vector y
-the content of y will be copied to x
-
-    vector <vector <int> *> Comp;//for each city it shows the component the city belongs
-    for(int i=0; i<n; i++) {
-        Comp.push_back(new vector<int>);
-        Comp[i]->push_back(i);
-
-    }
-    F(Comp, n);
-    Comp[0]->push_back(10);
-    Comp[1] = Comp[0];
-    F(Comp,n);
-    Comp[1]->at(0) = 32;
-    F(Comp, n);
-
-
-void F(vector<vector<int> *> C, int n){
-    for(int i=0; i<n; i++){
-        for(int j=0; j<C[i]->size(); j++) cout<< 1+ C[i]->at(j) _space;
-        cout<< "   "<< C[i];
-        cout _endl;
-    }
-    cout _endl;
-    cout _endl;
-
-    
-}
-*/
 signed main(){
     ios::sync_with_stdio(0);    
     cin.tie(0);  cout.tie(0);    

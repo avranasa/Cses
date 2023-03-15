@@ -14,6 +14,7 @@ void go(int offset, int k) {
   }
 }
 
+
 All Permutations of N elements
 ==============================
 vector<int> people;//contains the N elements
@@ -82,6 +83,17 @@ Locally checking code
 Create the files in.txt and out.txt on the same directory and use the commands below...
   freopen("in.txt", "r", stdin);
   freopen("out.txt", "w", stdout);
+
+
+Creating a vector of pointers to vectors
+========================================'
+//I am unsure if the following code is a good use of C++
+vector <vector <int> *> V;//for each city it shows the component the city belongs
+for(int i=0; i<n; i++) {
+    V.push_back(new vector<int>);
+    V[i]->push_back(2*i);//Each vector is initialized having one element of value 2*i
+}
+V[1]->at(0) = 32;//Changing the second vector's first element to 32
 
 
 General advices
@@ -196,7 +208,7 @@ Some gits command
 
 Most used commands :
 - clone repo : `git clone`
-- add remote `git remote add origin <PATH of .git>`
+- add remote `git remote add origin <PATH of .git>` (git init first)
 - create branch `git checkout -b newbranch`
 - change branch `git checkout master`
 - add all files : `git add .`
