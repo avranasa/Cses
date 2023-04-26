@@ -2,24 +2,24 @@
 #include <vector>
 #include <string>
 using namespace std;
-
+ 
 #define N 7//number of squares per edge
-
-
+ 
+ 
 bool FeasibleNewMove(bool Occupied[N+2][N+2], short last_i, short last_j){
     if ((!Occupied[last_i-1][last_j] && !Occupied[last_i+1][last_j]) && (Occupied[last_i][last_j-1] && Occupied[last_i][last_j+1])) return false;//creating a close loop...
     if ((!Occupied[last_i][last_j-1] && !Occupied[last_i][last_j+1]) && (Occupied[last_i-1][last_j] && Occupied[last_i+1][last_j])) return false;//creating a close loop...
     return true;
 }
-
-
+ 
+ 
 bool CheckFinalCell(short last_i, short last_j, int N_steps){
     if ((last_i!=N) || (last_j!=1)) return true;
     if (N_steps == N*N-1) return true;
     else return false;
 }
-
-
+ 
+ 
 bool CheckOneWay(bool Occupied[N+2][N+2], short i, short j){
     if ( !Occupied[i-1][j] ){
         if (Occupied[i+1][j] && Occupied[i][j-1] && Occupied[i][j+1]) return true;
@@ -36,15 +36,15 @@ bool CheckOneWay(bool Occupied[N+2][N+2], short i, short j){
     if (!Occupied[i][j+1]) return true;
     return false;   
 }
-
-
+ 
+ 
 //void FillPaths(int &N_paths, vector<char> & current_path, bool Occupied[N+2][N+2], short last_i, short last_j){
 void FillPaths(int &N_paths, bool Occupied[N+2][N+2], short last_i, short last_j, short &N_steps, char * RequestedPath){
     if ((last_i==N) && (last_j==1)){
         N_paths ++;
         return;
     } 
-
+ 
     /*//It made it slower the below "improvement"!
     vector <char> Moves= {'U','D','L','R'};
     for (char m:Moves){
@@ -98,10 +98,12 @@ void FillPaths(int &N_paths, bool Occupied[N+2][N+2], short last_i, short last_j
         }
     } 
 }
-
-
-
-int main(){
+ 
+ 
+ 
+int main(){    
+    ios::sync_with_stdio(0);
+    cin.tie(0);  cout.tie(0);
     //begin from point (1,1) and final position (N,1)
     //vector <char> current_path;//**************SOS*************** YOU DO NOT HAVE TO COMPUTE THE PATH! IT DOUBLES THE TIME IF YOU DO
     int N_paths=0;
@@ -119,8 +121,7 @@ int main(){
     
     char RequestedPath[N*N];
     cin >> RequestedPath;
-
+ 
     FillPaths(N_paths, Occupied, last_i,last_j, N_steps, RequestedPath);//FillPaths(N_paths, current_path, Occupied, last_i,last_j);
     cout << N_paths <<endl;
 }
-

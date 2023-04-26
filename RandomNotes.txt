@@ -220,6 +220,7 @@ Most used commands :
 - create commit + commentary : `git commit -m "some commit"`
 - push to remote : `git push origin some_remote_branch`
 - get modifications and try to merge : `git pull`
+(first init -> add -> commit -> push ??)
 
 Other commands : 
 - get modif without merging : `git fetch`
