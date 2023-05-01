@@ -29,6 +29,12 @@ vector <char> People  = {'a','b','c','d'};// size less than 32 since "i" is inte
   }
 
 
+Create 2D matrices as arguments
+===============================
+Do not try to create a 2D matrix that its dimensions are defined on the run (with cin >> ) and pass it 
+to a function as an argument. Always I have troubles with  "new" command. Either use
+vector <int> A[n]; for(int i=0;i<m;i++) A.push_back(...); and pass it as argument in function "vector<int> A[]"
+or just define a global big (using the problem's constraint) 2D array.
 
 Complexities
 ================================================
