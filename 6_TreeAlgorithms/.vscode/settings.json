@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "MLTable": "yaml",
-        "cmath": "cpp",
-        "iostream": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
-}
