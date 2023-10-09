@@ -1,3 +1,6 @@
+//Solved it with one DFS and a Union-Find type of algorithm/structure... You can solve 
+//it also using Kosaraju's Algorithm for finding connected components which uses 2 DFS...
+
 #include <bits/stdc++.h>
 #define _endl <<'\n'
 #define _space <<' '
@@ -16,12 +19,15 @@ void DFS(int s, vector<int> A[], int ToCapital[], int Path[]){
     for (int s_new: A[s]){
         if (ToCapital[s_new]==-1){
             Path[s_new] = Path[s] + 1;
-            ToCapital[s_new] = s_new;
+            ToCapital[s_new] = s_new;//new node is a kingdom on its own with capital.
             DFS(s_new, A, ToCapital, Path);
         }
         new_ToCapital = FindCapital(ToCapital, s_new);
+        //SCENARIO 2:
         if (Path[new_ToCapital]==-1) continue;//Imagine scenario 1->2->3->4->5->1 and then
                             //  you check 2->4. That time node 4 has Path=-1 and points to 1.
+
+        //SCENARIO 1:
         if (Path[new_ToCapital]<rank_of_cap)   {
             //found an older-ranked capital
             rank_of_cap = Path[new_ToCapital];
@@ -45,9 +51,9 @@ int main(){
     }
     // Reasoning of DFS solution.
     // Every new node you put it in a new kingdom/set (i.e. capital is itself). If from a node A you visit
-    //  a node  B that is already in an older kingdom that has capital C then there are two scenarios. If there 
-    //  is a Path from C to A  you move also node A to the same kingdom (by setting ToCapital[A]=C) otherwise 
-    //  (i.e. when Path[new_ToCapital]==-1) you continue your search.
+    //  a node  B that is already in an older kingdom that has capital C then there are two scenarios. 
+    // SCENARIO 1: There is a Path from C to A, so you move also node A to the same kingdom (by setting ToCapital[A]=C), 
+    // SCENARIO 2: otherwise, (i.e. when Path[new_ToCapital]==-1) you continue your search.
     int kingdom[n], ToCapital[n], Path[n], max_k = 0, capital;//Based on Union-Find structure. ToCapital is 
         // moving you to a node/planet that is or is closer to the capital of the kingdom. A capital of a 
         // kingdom point to itself (i.e. if x is capital then ToCapital[x]=x). If a node has Path[x]=-1 then

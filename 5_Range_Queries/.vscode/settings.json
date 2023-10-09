@@ -2,6 +2,7 @@
     "files.associations": {
         "MLTable": "yaml",
         "iostream": "cpp",
-        "iosfwd": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp"
     }
 }

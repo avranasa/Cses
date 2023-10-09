@@ -70,7 +70,18 @@ iota(idx.begin(), idx.end(), 0);
 // to avoid unnecessary index re-orderings when v contains elements of equal values 
 stable_sort(idx.begin(), idx.end(), [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});///ASCENDING ORDER
 sort(numbers.rbegin(), numbers.rend());  IS better than sort(numbers.begin(), numbers.end(), std::greater<int>()); 
-    for descending order sorting because it will not mess up when it comes for long long int input.
+    for descending order sorting because it will not mess up when it comes for long long int input. ///DESCENDING ORDER
+
+
+Do NOT iterate through a container and change it
+================================================
+vector <int> V={1,3,5};
+for (auto x:V)  V.push_back(x);//It gave different results per run. Once V was {1 3 5 1 524 -1483472560} !!!???
+                      //Same will haven also if you use for(auto & x:V) or for(auto const x:V) or for(auto const & x:V)
+
+Also the following will run indefinetely
+vector <int> V={1,3,5};
+for(int i=0; i<V.size(); i++) V.push_back(i);
 
 
 Adding & removing elements from a structure but able to query how many of the remaining elements are smaller/bigger
@@ -82,6 +93,29 @@ using namespace __gnu_pbds;
 ordered_set s; // it has all the functionalities of the normal c++ sets plus the two following functions
 *(s.find_by_order(k))//finds the k-th biggest element
 s.order_of_key(x) // finds the index/position of x element
+
+LOWER_BOUND and upper_bound
+===========================
+In case you have a vector V (example 10 20 20 30 30):
+-lower_bound: You use "V[i] cmp val". In the default case where cmp is < you can think
+as scanning from left to right the vector and the first i giving "V[i] cmp val" False is the output.
+(if T is True and F False then in the example "lower_bound(V.begin(), V.end(), 20)"
+will see the comparisons T F F F F F... so the output is position 1)
+
+-upper_bound: You use "val cmp V[i]". In the default case where cmp is < you can think
+as scanning from left to right the vector and the first i giving "val cmp V[i]" True  is the output.
+(if T is True and F False then in the example "upper_bound (V.begin(), V.end(), 20)"
+will see the comparisons F F F T T ... so the output is position 3)
+
+To understand better how they work check the code in https://cplusplus.com/reference/algorithm/lower_bound/ 
+showing the behavior of lower_bound function
+
+
+Create sorted vector without duplicates
+=======================================
+  sort(V.begin(),V.end());
+  auto it = unique(V.begin(), V.end())
+  V.erase(it, V.end());//instead you could also use V.resize( distance(V.begin(),it) );
 
 
 Locally checking code
@@ -100,6 +134,14 @@ for(int i=0; i<n; i++) {
     V[i]->push_back(2*i);//Each vector is initialized having one element of value 2*i
 }
 V[1]->at(0) = 32;//Changing the second vector's first element to 32
+
+
+Multiset-tips
+=============
+Be careful if you use the multiset S has many times the value "x" and then 
+S.count(x) can be linear to S.size()!
+If you want to remove only one "x" from the multiset do S.erase(S.find(x)) 
+because S.erase(S.find(x)) will erase all the elements of S with value x.
 
 
 General advices
@@ -145,6 +187,7 @@ that are greater than their size. e.g. vector <int> P(N); cout << P[N];...
 BE CAREFUL when passing data structures like "vector" as argument in a function. If 
 you do not use the "&" it will copy all the data structure!!! CAN TAKE LOTS OF TIME 
 
+CAREFUL when you need to divide and you give the answers in MODULO md...! 
 
 AVOID DECLARING VARIABLES IN FOR/IF LOOPS. For example:
 vector<vector <int> *> P(1);
@@ -203,8 +246,15 @@ for (auto const& move: Moves){
   ...
 
 
-#define INF 8e18//for long long 9e18 is the maximum... I put a bit less so as to be able to add a number (less than 1e18...) without going to the minus
+#define INF 8e18//for long long 9e18 is the maximum... I put a bit less so as to be able to add a 
+number (less than 1e18...) without going to the minus
 
+Maybe if you define arrays of size  you will have memory problems
+and the problem will exit without any warning/error!!!
+Strangely if you define the array outside (and before) the int main(){} then it may work!!!???
+
+In a problem I could either use an array "int X[5000][5000]" for the solution or rewriting the code 
+and use instead an array "int X[5000][2]"...The second way was 10 times faster!!! (from 0.2s to 0.02s)
 
 
 NICE PROBLEMS

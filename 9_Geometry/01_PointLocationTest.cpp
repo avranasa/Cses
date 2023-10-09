@@ -2,6 +2,7 @@
 using namespace std;
 
 int main(){
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     pair <long long, long long> p1, p2,p3 , v1,v2;
     int x,y, n;
     cin >>n;
@@ -14,13 +15,8 @@ int main(){
         v1.second = p2.second-p1.second;
         v2.second = p3.second-p1.second;
         long long sinT = v1.first*v2.second - v2.first*v1.second;
-        if (sinT==0) cout <<"TOUCH";
-        else if (sinT>0) cout << "LEFT";
-        else cout <<"RIGHT";
-        cout << endl;
+        if (sinT==0) cout <<"TOUCH\n";
+        else if (sinT>0) cout << "LEFT\n";
+        else cout <<"RIGHT\n";
     }
-
-        
-
-
 }

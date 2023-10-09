@@ -20,6 +20,7 @@ int Less180(int x1, int y1, int x2, int y2, int x3, int y3){
 }
 
 signed main(){
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     int t, x1, y1, x2, y2, x3, y3, x4, y4, p1, p2, p3, p4;
     cin >> t;
     for( int i=0; i<t; i++){
@@ -33,6 +34,4 @@ signed main(){
         else if (p1*p2>0 && p2*p3>0 && p3*p4>0) cout <<"YES" _endl;
         else  cout << "NO" _endl;
     }   
-    //A second (probably easier conceived) method is to find the if the line segment are parallel and if
-    //not to find if the common point of their line extension is also a point of any of those segments
 }
